@@ -1,0 +1,16 @@
+# Configuration
+
+discord:
+  token: "" # Token Here
+  prefix: ""
+  
+  channels:
+    welcomeChannel: ""
+    verifChannel: ""
+
+database:
+  auth: ""
+
+developers:
+  - ""
+  - ""
