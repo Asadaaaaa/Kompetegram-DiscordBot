@@ -5,13 +5,10 @@ import EventsHandler from "./events/EventsHandler.js";
 import { Client, GatewayIntentBits } from "discord.js";
 
 class Server {
-
   data = {};
   
   constructor() {
     this.init();
-
-    return;
   }
 
   async init() {
@@ -26,8 +23,6 @@ class Server {
       return;
     }
     this.start();
-
-    return;
   }
 
   start() {
@@ -43,18 +38,16 @@ class Server {
     new EventsHandler(this, client);
 
     client.login(this.data.config.discord.token);
-
-    return;
   }
 
   sendLogs(text) {
-    let date = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Jakarta'}));
-    let currentDate = '[' + date.getDate() + '/' 
-        + (date.getMonth()+1)  + '/' 
-        + date.getFullYear() + '|'  
-        + date.getHours() + ':'  
-        + date.getMinutes() + ':' 
-        + date.getSeconds() + ']';
+    let date = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"}));
+    let currentDate = "[" + date.getDate() + "/" 
+        + (date.getMonth()+1)  + "/" 
+        + date.getFullYear() + "|"  
+        + date.getHours() + ":"  
+        + date.getMinutes() + ":" 
+        + date.getSeconds() + "]";
 
     console.log("\n", currentDate + ": " + text);
   }

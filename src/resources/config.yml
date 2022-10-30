@@ -6,6 +6,7 @@ discord:
   
   channels:
     welcomeChannel: ""
+    membersCounter: ""
     verifChannel: ""
 
 database:
