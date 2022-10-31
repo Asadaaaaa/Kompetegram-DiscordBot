@@ -5,15 +5,15 @@ import { AttachmentBuilder } from "discord.js";
 class OnGuildMemberAdd {
   constructor(server, client) {
 
-    client.on("guildMemberAdd", async (guild) => {
+    client.on("guildMemberAdd", async (event) => {
       
       if(server.data.config.discord.channels.welcomeChannel === "") return;
-      if(guild.user.bot) return;
+      if(event.user.bot) return;
 
       const welcomeChannel = client.channels.cache.get(server.data.config.discord.channels.welcomeChannel);
   
       try {
-          welcomeChannel.send({files: [await this.welcomeBanner(guild.user)]});
+          welcomeChannel.send({files: [await this.welcomeBanner(event.user)], content: `>>> Halo <@${event.user.id}>, Selamat datang :wave:. Harap segera mengunjungi channel <#${server.data.config.discord.channels.guideChannel}>.`});
       } catch (error) {
           console.log(error)
       }
