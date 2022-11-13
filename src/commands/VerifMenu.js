@@ -1,5 +1,5 @@
 // Library
-import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
 
 class VerifMenu {
   constructor(server, client, e) {
@@ -14,6 +14,7 @@ class VerifMenu {
 
   async menuForm() {
     let menu = await this.e.channel.send('Starting...');
+
     let menuText = new EmbedBuilder()
     .setTitle(':pencil: Member Verification')
     .setColor('Blue')
@@ -24,16 +25,38 @@ class VerifMenu {
 
     let menuBtn = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId('verify')
+      .setCustomId('verify1')
       .setLabel('Verification')
-      .setStyle(ButtonStyle)
+      .setStyle(ButtonStyle.Primary)
       .setDisabled(false)
     );
+    
+    let textInput = new ActionRowBuilder().addComponents(
+      new TextInputBuilder()
+      .setCustomId("zkaid")
+      .setLabel("input zka:")
+      .setMinLength(3)
+      .setStyle(TextInputStyle.Short)
+    );
+
+    let modal = new ModalBuilder()
+    .setCustomId("azkaModal")
+    .setTitle("Azka")
+    .addComponents(textInput);
 
     menu.edit({
       content: 'Test',
       embeds: [menuText],
       components: [menuBtn]
+    });
+
+    menu.createMessageComponentCollector({
+      filter: async (interaction) => {
+        interaction.showModal(modal);
+        
+        // interaction.deferUpdate();
+        // this.e.channel.send("konz");
+      }
     });
   }
 };
