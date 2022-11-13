@@ -6,14 +6,16 @@
   "main": "./src/Main.js",
   "scripts": {
     "start": "node --no-warnings .",
+    "mon": "nodemon --no-warnings .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "canvas": "^2.10.2",
+    "canvas": "^2.10.1",
     "discord.js": "^14.6.0",
     "fs-extra": "^10.1.0",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "nodemon": "^2.0.20"
   }
 }

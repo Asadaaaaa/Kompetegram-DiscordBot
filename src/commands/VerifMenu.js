@@ -1,5 +1,5 @@
 // Library
-import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
 class VerifMenu {
   constructor(server, client, e) {
@@ -18,7 +18,7 @@ class VerifMenu {
     let menuText = new EmbedBuilder()
     .setTitle(':pencil: Member Verification')
     .setColor('Blue')
-    .setDescription(':grey_exclamation:Harap lakukan verifikasi dengan klik tombol "Verification" di bawah dan mengisi form tersebut untuk mendapatkan akses discord KOMPETEGRAM.')
+    .setDescription(':grey_exclamation:Harap lakukan verifikasi dengan klik tombol "Verify" di bawah dan mengisi form tersebut untuk mendapatkan akses discord KOMPETEGRAM.')
     .setFooter({
       text: this.client.user.username + ' - 2022'
     });
@@ -26,37 +26,15 @@ class VerifMenu {
     let menuBtn = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId('verify1')
-      .setLabel('Verification')
+      .setLabel('Verify')
       .setStyle(ButtonStyle.Primary)
       .setDisabled(false)
     );
-    
-    let textInput = new ActionRowBuilder().addComponents(
-      new TextInputBuilder()
-      .setCustomId("zkaid")
-      .setLabel("input zka:")
-      .setMinLength(3)
-      .setStyle(TextInputStyle.Short)
-    );
-
-    let modal = new ModalBuilder()
-    .setCustomId("azkaModal")
-    .setTitle("Azka")
-    .addComponents(textInput);
 
     menu.edit({
-      content: 'Test',
+      content: '',
       embeds: [menuText],
       components: [menuBtn]
-    });
-
-    menu.createMessageComponentCollector({
-      filter: async (interaction) => {
-        interaction.showModal(modal);
-        
-        // interaction.deferUpdate();
-        // this.e.channel.send("konz");
-      }
     });
   }
 };
