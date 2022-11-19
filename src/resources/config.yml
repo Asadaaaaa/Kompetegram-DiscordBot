@@ -2,16 +2,24 @@
 
 discord:
   token: "" # Token Here
-  prefix: ""
+  prefix: "</"
   
+  guild: ""
   channels:
     welcomeChannel: ""
+    leaveChannel: ""
+    guideChannel: ""
     membersCounter: ""
     verifChannel: ""
+  
+  rolesId:
+    batch1: ""
+    batch2: ""
+    batch3: ""
 
 database:
   auth: ""
 
 developers:
-  - ""
-  - ""
+  - "282363030501720076"
+  - "688694650760069158"

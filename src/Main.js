@@ -1,21 +1,27 @@
 import { resourceLoader, getFileData } from "./utils/FileDataHandler.js";
 import EventsHandler from "./events/EventsHandler.js";
+import ModelHandler from "./model/ModelHandler.js";
 
 // Library
 import { Client, GatewayIntentBits } from "discord.js";
 
 class Server {
-  data = {};
+  data = {
+    tempVerif: {}
+  };
   
   constructor() {
     this.init();
   }
 
   async init() {
-    this.sendLogs("Starting Bot...")
-
     await resourceLoader();
     this.data.config = await getFileData("config.yml", "YAML");
+
+    this.model = new ModelHandler(this);
+    await this.model.connect(this.data.config.database.auth);
+    
+    this.sendLogs("Starting Bot...")
 
     if(this.data.config.discord.token === "") {
       this.sendLogs("Token can't be empty");
