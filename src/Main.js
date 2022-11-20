@@ -34,7 +34,7 @@ class Server {
     }
     this.sendLogs('Database Connected');
     
-    this.sendLogs("Starting Bot...")
+    this.sendLogs("Starting Bot...");
 
     if(this.data.config.discord.token === "") {
       this.sendLogs("Token can't be empty");
