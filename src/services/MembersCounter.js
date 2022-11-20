@@ -19,7 +19,7 @@ class MembersCounter {
     
     setInterval(() => {
       const countTotalMembers = guild.memberCount;
-      totalMemberChannels.setName("Members: " + countTotalMembers);
+      totalMemberChannels.setName("KOMPETEGRAMERS: " + countTotalMembers);
     }, 3000);
   }
 }
