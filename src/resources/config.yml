@@ -2,7 +2,7 @@
 
 discord:
   token: "" # Token Here
-  prefix: "</"
+  prefix: ""
   
   guild: ""
   channels:
@@ -11,11 +11,6 @@ discord:
     guideChannel: ""
     membersCounter: ""
     verifChannel: ""
-  
-  rolesId:
-    batch1: ""
-    batch2: ""
-    batch3: ""
 
 database:
   auth: ""
