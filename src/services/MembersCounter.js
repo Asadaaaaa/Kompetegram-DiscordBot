@@ -20,7 +20,7 @@ class MembersCounter {
     setInterval(() => {
       const countTotalMembers = guild.memberCount;
       totalMemberChannels.setName("KOMPETEGRAMERS: " + countTotalMembers);
-    }, 3000);
+    }, 86400000);
   }
 }
 
