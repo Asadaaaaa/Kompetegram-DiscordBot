@@ -18,8 +18,21 @@ class Server {
     await resourceLoader();
     this.data.config = await getFileData("config.yml", "YAML");
 
+    if(this.data.config.database.auth === "") {
+      this.sendLogs("Database MongoDB Authectication can't be empty");
+
+      return;
+    }
+
+    this.sendLogs('Starting Database Connection to MongoDB...');
     this.model = new ModelHandler(this);
-    await this.model.connect(this.data.config.database.auth);
+    try {
+      await this.model.connect(this.data.config.database.auth);
+    } catch(err) {
+      this.sendLogs("Database Connection Error");
+      return;
+    }
+    this.sendLogs('Database Connected');
     
     this.sendLogs("Starting Bot...")
 
