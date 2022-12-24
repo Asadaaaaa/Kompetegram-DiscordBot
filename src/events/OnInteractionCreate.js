@@ -8,11 +8,6 @@ class OnInteractionCreate {
     client.on("interactionCreate", async (e) => {
 
       if(e.customId === 'verify1') {
-        if(server.data.tempVerif[e.user.id]) {
-          e.deferUpdate();
-          return; 
-        }
-
         this.verificationEmailModdal(e);
       }
       
