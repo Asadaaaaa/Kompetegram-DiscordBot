@@ -1,8 +1,8 @@
 # Configuration
 
 discord:
-  token: "" # Token Here
-  prefix: ""
+  token: ""
+  prefix: "</"
   
   guild: ""
   channels:
@@ -10,11 +10,20 @@ discord:
     leaveChannel: ""
     guideChannel: ""
     membersCounter: ""
+    mainInformation: ""
     verifChannel: ""
+  
+  rolesId:
+    kompetegramers: ""
+    batch1: ""
+    batch2: ""
+    batch3: ""
+    studyGroup: ""
+    researchGroup: ""
 
 database:
   auth: ""
 
 developers:
-  - "282363030501720076"
-  - "688694650760069158"
+  - ""
+  - ""
