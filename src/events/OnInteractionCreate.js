@@ -27,7 +27,7 @@ class OnInteractionCreate {
 
           server.data.tempVerif[e.user.id] = {
             verifCode: null,
-            batch: null,
+            data: null,
             eventData: null
           };
 
@@ -36,7 +36,7 @@ class OnInteractionCreate {
             ephemeral: true
           });
           
-          const data = await verificationService.emailCheck(emailInput);
+          const data = await verificationService.memberCheck(emailInput);
           
           if(data !== null) {
             await e.editReply({
@@ -44,7 +44,7 @@ class OnInteractionCreate {
               ephemeral: true
             });
 
-            server.data.tempVerif[e.user.id].batch = data.batch;
+            server.data.tempVerif[e.user.id].data = data;
             server.data.tempVerif[e.user.id].eventData = e;
             
             const isSent = await verificationService.sendVerifMail(emailInput, `${e.user.username}#${e.user.discriminator}`, e.user.id);
@@ -66,7 +66,7 @@ class OnInteractionCreate {
             }
           } else {
             await e.editReply({
-              content: ':x: Email tidak ditemukan!, harap coba lagi dengan tekan tombol "Verify" diatas.',
+              content: ':x: Email tidak ditemukan atau belum terverifikasi!, harap coba lagi dengan tekan tombol "Verify" diatas.',
               ephemeral: true
             });
 
@@ -81,11 +81,14 @@ class OnInteractionCreate {
               e.deferUpdate();
               
               await server.data.tempVerif[e.user.id].eventData.editReply({
-                content: `:ballot_box_with_check: Verifikasi Berhasil!, kamu akan mendapatkan roles anggota batch ${server.data.tempVerif[e.user.id].batch} dalam beberapa saat.`,
+                content: `:ballot_box_with_check: Verifikasi Berhasil!, dan kamu telah mendapat Roles. Buka channel  <#${server.data.config.discord.channels.mainInformation}> untuk melihat informasi lebih lanjut.`,
                 ephemeral: true
               });
 
-              switch(server.data.tempVerif[e.user.id].batch) {
+              const roles = e.guild.roles.cache.find(role => role.id === server.data.config.discord.rolesId.kompetegramers);
+              e.member.roles.add(roles);
+
+              switch(server.data.tempVerif[e.user.id].data.batch) {
                 case 1: {
                   const roles = e.guild.roles.cache.find(role => role.id === server.data.config.discord.rolesId.batch1);
 
@@ -103,9 +106,19 @@ class OnInteractionCreate {
                 case 3: {
                   const roles = e.guild.roles.cache.find(role => role.id === server.data.config.discord.rolesId.batch3);
 
-                  e.member.roles.add(roles)
+                  e.member.roles.add(roles);
                   break;
                 }
+              }
+
+              if(server.data.tempVerif[e.user.id].data.group === "Study Group") {
+                const roles = e.guild.roles.cache.find(role => role.id === server.data.config.discord.rolesId.studyGroup);
+
+                e.member.roles.add(roles);
+              } else if(server.data.tempVerif[e.user.id].data.group === "Research Group") {
+                const roles = e.guild.roles.cache.find(role => role.id === server.data.config.discord.rolesId.researchGroup);
+
+                e.member.roles.add(roles);
               }
 
               delete server.data.tempVerif[e.user.id];

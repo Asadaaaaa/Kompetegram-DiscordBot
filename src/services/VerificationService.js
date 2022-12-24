@@ -7,19 +7,24 @@ class VerificationService {
     this.server = server;
   }
 
-  async emailCheck(email) {
-    // const batch1, batch2
+  async memberCheck(email) {
+    const data = await (await this.server.model.db.collection('members')).findOne({ email });
 
-    const batch3 = await (await this.server.model.db.collection('members-batch-3')).findOne({ email });
+    if(data == null || data.status !== 'Verified') return null;
 
-    if(batch3 === null) {
-      // TODO
-      return null;
-    } else {
-      return {
-        batch: 3
-      };
+    const tempMemberData = {
+      nim: data.nim,
+      batch: data.batch,
+      group: null
     }
+
+    const groupData = await (await this.server.model.db.collection('members-group')).findOne({ nim: data.nim });
+
+    if(groupData != null) {
+      tempMemberData.group = groupData.group;
+    }
+
+    return tempMemberData;
   }
 
   async sendVerifMail(email,  userTag, userId) {
