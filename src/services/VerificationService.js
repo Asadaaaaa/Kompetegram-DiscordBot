@@ -42,8 +42,8 @@ class VerificationService {
       host: "smtp.gmail.com",
       port: 587,
       auth: {
-        user: 'kompetegram.verif@gmail.com', // generated ethereal user
-        pass: 'qzvnmqcuujhdpeaa', // generated ethereal password
+        user: this.server.data.config.nodemailer.email, // generated ethereal user
+        pass: this.server.data.config.nodemailer.etherealPassword, // generated ethereal password
       },
     });
     
