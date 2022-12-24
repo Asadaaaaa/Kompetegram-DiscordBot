@@ -1,5 +1,6 @@
 import SendGuide from "../commands/SendGuide.js";
 import VerifMenu from "../commands/VerifMenu.js";
+import SendMessage from "../commands/SendMessage.js";
 
 class OnMessageCreate {
   constructor(server, client) {
@@ -19,6 +20,11 @@ class OnMessageCreate {
         
         case "send_verif_menu": {
           new VerifMenu(server, client, e);
+          break;
+        }
+
+        case "send_message": {
+          new SendMessage(server, client, e);
           break;
         }
       }
